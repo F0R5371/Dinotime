@@ -182,7 +182,9 @@ MonoBehaviour:
   generationBoundSize: {x: 12, y: 16}
   offset: {x: 0.5, y: -0.5}
   chunkSize: 16
-  fossilFreq: 3
+  chunkChance: 0.5
+  fossilFreq: 5
+  padding: 0
 --- !u!4 &908294606
 Transform:
   m_ObjectHideFlags: 0
