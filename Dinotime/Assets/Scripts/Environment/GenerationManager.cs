@@ -61,13 +61,13 @@ public class GenerationManager : MonoBehaviour
     
                 if (isFossil < (float)fossilFreq / chunkSize)
                 {
-                    GameObject fossil = Resources.Load<GameObject>("Prefabs/Fossil");
+                    GameObject fossil = Resources.Load<GameObject>("Prefabs/Environment/Underground/Fossil");
 
                     Instantiate(fossil, new Vector2(i, j), Quaternion.identity, tiles);
                 }
                 else
                 {
-                    GameObject ground = Resources.Load<GameObject>("Prefabs/Ground");
+                    GameObject ground = Resources.Load<GameObject>("Prefabs/Environment/Underground/Ground");
 
                     Instantiate(ground, new Vector2(i, j), Quaternion.identity, tiles);
                 }
