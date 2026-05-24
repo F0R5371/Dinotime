@@ -6,36 +6,43 @@ public class DrillMovement : MonoBehaviour
     public float speed;
 
     private bool isMining = false;
+    private bool playerInDrill = false;
 
     private float headingAngle = 0;
     private Vector2 inputDir;
 
-    private GameObject followCamera;
     private Rigidbody2D rb;
     private SpriteRenderer sp;
 
-    public void SwitchToDrill(Transform player)
+    private DrillRange range;
+    private PlayerManager playerManager;
+
+    public void StartCamera()
     {
-        print("Camera moves to focus on drill, player now moves with drill.");
+        transform.Find("FollowCamera").gameObject.SetActive(true);
 
-        player.Find("FollowCamera").gameObject.SetActive(false);
-
-        followCamera.SetActive(true);
+        playerInDrill = true;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        followCamera = transform.Find("FollowCamera").gameObject;
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
+        transform.Find("FollowCamera").gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
+
+        range = transform.GetComponentInChildren<DrillRange>();
+        enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         Rotate();
+        ExitDrill();
     }
 
     void FixedUpdate()
@@ -86,6 +93,24 @@ public class DrillMovement : MonoBehaviour
             {
                 isMining = true;
             }
+        }
+    }
+
+    private void ExitDrill()
+    {
+        if (!playerInDrill)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            playerManager.SwitchCameras("player");
+
+            rb.linearVelocity = Vector2.zero;
+
+            transform.Find("FollowCamera").gameObject.SetActive(false);
+            enabled = false;
+
+            range.canActivate = false;
         }
     }
 }

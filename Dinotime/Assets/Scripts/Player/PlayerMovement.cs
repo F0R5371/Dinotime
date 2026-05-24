@@ -20,6 +20,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    public void StopCamera()
+    {
+        transform.Find("FollowCamera").gameObject.SetActive(false);
+
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public void StartCamera()
+    {
+        transform.Find("FollowCamera").gameObject.SetActive(true);
+    }
+
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
