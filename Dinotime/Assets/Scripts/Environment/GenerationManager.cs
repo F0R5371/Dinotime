@@ -58,18 +58,22 @@ public class GenerationManager : MonoBehaviour
             {
                 float isFossil = Random.value;
                 Transform tiles = GameObject.Find("UndergroundTiles").transform;
-    
+
                 if (isFossil < (float)fossilFreq / chunkSize)
                 {
-                    GameObject fossil = Resources.Load<GameObject>("Prefabs/Environment/Underground/Fossil");
+                    int fossilTexture = Random.Range(0, 3);
 
-                    Instantiate(fossil, new Vector2(i, j), Quaternion.identity, tiles);
+                    GameObject fossil = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Fossil{fossilTexture}");
+
+                    Instantiate(fossil, new Vector2(i, j) + offset, Quaternion.identity, tiles);
                 }
                 else
                 {
-                    GameObject ground = Resources.Load<GameObject>("Prefabs/Environment/Underground/Ground");
+                    int groundTexture = Random.Range(0, 3);
 
-                    Instantiate(ground, new Vector2(i, j), Quaternion.identity, tiles);
+                    GameObject ground = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Ground{groundTexture}");
+
+                    Instantiate(ground, new Vector2(i, j) + offset, Quaternion.identity, tiles);
                 }
             }
         }
