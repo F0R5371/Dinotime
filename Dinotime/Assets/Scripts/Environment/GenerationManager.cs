@@ -10,6 +10,7 @@ public class GenerationManager : MonoBehaviour
     public int chunkSize;
     public int fossilFreq;
     private GameObject[] fossilPrefabs;
+    private GameObject[] oilPrefabs;
     private GameObject[] groundPrefabs;
     private GameObject grassPrefab;
 
@@ -17,11 +18,13 @@ public class GenerationManager : MonoBehaviour
     {
         fossilPrefabs = new GameObject[3];
         groundPrefabs = new GameObject[3];
+        oilPrefabs = new GameObject[3];
 
         for (int i = 0; i < 3; i++)
         {
             fossilPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Fossil{i}");
             groundPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Ground{i}");
+            oilPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Oil{i}");
         }
 
         grassPrefab = Resources.Load<GameObject>("Prefabs/Environment/Underground/Grass");
@@ -49,8 +52,16 @@ public class GenerationManager : MonoBehaviour
 
                 if (isFossil < (float)fossilFreq / chunkSize)
                 {
+                    float oilOrFossil = UnityEngine.Random.value;
                     int index = Random.Range(0, 3);
-                    Instantiate(fossilPrefabs[index], spawnPos, Quaternion.identity, tilesParent);
+                    if (oilOrFossil > 0.5)
+                    {
+                        Instantiate(fossilPrefabs[index], spawnPos, Quaternion.identity, tilesParent);
+                    }
+                    else
+                    {
+                        Instantiate(oilPrefabs[index], spawnPos, Quaternion.identity, tilesParent);
+                    }
                 }
                 else
                 {
