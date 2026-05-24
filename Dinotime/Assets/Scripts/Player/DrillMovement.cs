@@ -10,23 +10,18 @@ public class DrillMovement : MonoBehaviour
     private float headingAngle = 0;
     private Vector2 inputDir;
 
-    private GameObject followCamera;
     private Rigidbody2D rb;
     private SpriteRenderer sp;
 
-    public void SwitchToDrill(Transform player)
+    public void StartCamera()
     {
-        print("Camera moves to focus on drill, player now moves with drill.");
-
-        player.Find("FollowCamera").gameObject.SetActive(false);
-
-        followCamera.SetActive(true);
+        transform.Find("FollowCamera").gameObject.SetActive(true);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        followCamera = transform.Find("FollowCamera").gameObject;
+        transform.Find("FollowCamera").gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
