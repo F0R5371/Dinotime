@@ -10,6 +10,11 @@ public class DrillMovement : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sp;
 
+    public void SwitchToDrill()
+    {
+        print("Camera moves to focus on drill, player now moves with drill.");
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
