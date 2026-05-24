@@ -5,19 +5,29 @@ public class DrillMovement : MonoBehaviour
 {
     public float speed;
 
-    private float headingAngle = 0;
+    private bool isMining = false;
 
+    private float headingAngle = 0;
+    private Vector2 inputDir;
+
+    private GameObject followCamera;
     private Rigidbody2D rb;
     private SpriteRenderer sp;
 
-    public void SwitchToDrill()
+    public void SwitchToDrill(Transform player)
     {
         print("Camera moves to focus on drill, player now moves with drill.");
+
+        player.Find("FollowCamera").gameObject.SetActive(false);
+
+        followCamera.SetActive(true);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        followCamera = transform.Find("FollowCamera").gameObject;
+
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
     }
@@ -37,6 +47,9 @@ public class DrillMovement : MonoBehaviour
     private void Move()
     {
         float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
+        inputDir = new Vector2(x, y);
 
         rb.linearVelocity = new Vector2(x * speed, 0);
 
@@ -64,6 +77,15 @@ public class DrillMovement : MonoBehaviour
     {
         Vector2 headingDir = new Vector2(Mathf.Cos(Mathf.Deg2Rad * headingAngle), Mathf.Sin(Mathf.Deg2Rad * headingAngle));
 
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, headingDir, 1f, LayerMask.NameToLayer("Mineable"));
         Debug.DrawRay(transform.position, headingDir * 1, Color.red);
+
+        if (hit)
+        {
+            if (inputDir == headingDir)
+            {
+                isMining = true;
+            }
+        }
     }
 }

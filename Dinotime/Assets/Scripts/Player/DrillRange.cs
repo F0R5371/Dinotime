@@ -20,7 +20,7 @@ public class DrillRange : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            drill.SwitchToDrill();
+            drill.SwitchToDrill(collision.transform);
         }
     }
 }
