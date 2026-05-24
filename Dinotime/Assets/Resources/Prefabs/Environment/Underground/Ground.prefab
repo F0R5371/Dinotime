@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9170230063409787330}
   - component: {fileID: 3651216116676019437}
   - component: {fileID: -7150831409647175675}
+  - component: {fileID: 4170689542254240520}
   m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
@@ -138,3 +139,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4170689542254240520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5272767217170390347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca872b85d3fa4557b29afd59466a594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundTile
+  blockName: Ground
+  mineLifetime: 2
