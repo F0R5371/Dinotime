@@ -8,72 +8,49 @@ public class GenerationManager : MonoBehaviour
 
     [Header("Generation Settings")]
     public int chunkSize;
-    public int fossilFreq; // Per chunkSize blocks, how many are fossils?
+    public int fossilFreq;
+    private GameObject[] fossilPrefabs;
+    private GameObject[] groundPrefabs;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GenerateTiles();
-    }
+        fossilPrefabs = new GameObject[3];
+        groundPrefabs = new GameObject[3];
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-
-        int x1 = -generationBoundSize.x / 2;
-        int x2 = generationBoundSize.x / 2;
-        for (int i = x1; i < x2; i++)
+        for (int i = 0; i < 3; i++)
         {
-            int y1 = generationBoundSize.y / 2;
-            int y2 = -generationBoundSize.y / 2;
-
-            for (int j = y1; j >= y2 + 1; j--)
-            {
-                Gizmos.DrawWireCube(new Vector2(i, j) + offset, new Vector3(1, 1, 1));
-            }
+            fossilPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Fossil{i}");
+            groundPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Ground{i}");
         }
+
+        GenerateTiles();
     }
 
     private void GenerateTiles()
     {
-        LinearGenerate();
-    }
-
-    private void LinearGenerate()
-    {
         int x1 = -generationBoundSize.x / 2;
         int x2 = generationBoundSize.x / 2;
+        int y1 = generationBoundSize.y / 2;
+        int y2 = -generationBoundSize.y / 2;
+
+        Transform tilesParent = GameObject.Find("UndergroundTiles").transform;
 
         for (int i = x1; i < x2; i++)
         {
-            int y1 = generationBoundSize.y / 2;
-            int y2 = -generationBoundSize.y / 2;
             for (int j = y1; j >= y2 + 1; j--)
             {
                 float isFossil = Random.value;
-                Transform tiles = GameObject.Find("UndergroundTiles").transform;
+                Vector2 spawnPos = new Vector2(i, j) + offset;
 
                 if (isFossil < (float)fossilFreq / chunkSize)
                 {
-                    int fossilTexture = Random.Range(0, 3);
-
-                    GameObject fossil = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Fossil{fossilTexture}");
-
-                    Instantiate(fossil, new Vector2(i, j) + offset, Quaternion.identity, tiles);
+                    int index = Random.Range(0, 3);
+                    Instantiate(fossilPrefabs[index], spawnPos, Quaternion.identity, tilesParent);
                 }
                 else
                 {
-                    int groundTexture = Random.Range(0, 3);
-
-                    GameObject ground = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Ground{groundTexture}");
-
-                    Instantiate(ground, new Vector2(i, j) + offset, Quaternion.identity, tiles);
+                    int index = Random.Range(0, 3);
+                    Instantiate(groundPrefabs[index], spawnPos, Quaternion.identity, tilesParent);
                 }
             }
         }
