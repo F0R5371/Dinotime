@@ -114,9 +114,9 @@ public class DrillMovement : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-            Gizmos.color = Color.red;
-            Matrix4x4 rotationMatrix = Matrix4x4.TRS(drillTip.position, transform.rotation, Vector3.one);
-            Gizmos.matrix = rotationMatrix;
-            Gizmos.DrawWireCube(Vector3.zero, mineBoxSize);
+        Gizmos.color = Color.red;
+        Matrix4x4 rotationMatrix = Matrix4x4.TRS(drillTip.position, transform.rotation, Vector3.one);
+        Gizmos.matrix = rotationMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, mineBoxSize);
     }
 }

@@ -11,6 +11,7 @@ public class GenerationManager : MonoBehaviour
     public int fossilFreq;
     private GameObject[] fossilPrefabs;
     private GameObject[] groundPrefabs;
+    private GameObject grassPrefab;
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class GenerationManager : MonoBehaviour
             fossilPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Fossil{i}");
             groundPrefabs[i] = Resources.Load<GameObject>($"Prefabs/Environment/Underground/Ground{i}");
         }
+
+        grassPrefab = Resources.Load<GameObject>("Prefabs/Environment/Underground/Grass");
 
         GenerateTiles();
     }
@@ -37,6 +40,8 @@ public class GenerationManager : MonoBehaviour
 
         for (int i = x1; i < x2; i++)
         {
+            Instantiate(grassPrefab, new Vector2(i, y1 + 1) + offset, Quaternion.identity, tilesParent);
+
             for (int j = y1; j >= y2 + 1; j--)
             {
                 float isFossil = Random.value;
