@@ -69,7 +69,6 @@ public class DrillMovement : MonoBehaviour
 
         UpdateDrillVisuals(x);
 
-        // Logic: If Space is held, ANY valid direction input will trigger a mine
         if (Input.GetKey(KeyCode.Space))
         {
             if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))
@@ -77,7 +76,7 @@ public class DrillMovement : MonoBehaviour
                 TryMine();
             }
         }
-        // Logic: If you press the direction first, you can still mine if you hit space
+
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             TryMine();
