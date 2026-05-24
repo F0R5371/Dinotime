@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class DrillRange : MonoBehaviour
 {
-    private PlayerManager playerManager;
+    internal bool canActivate = true;
 
+    private PlayerManager playerManager;
     private DrillMovement drill;
 
     void Awake()
@@ -14,8 +15,7 @@ public class DrillRange : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        drill = transform.GetComponentInParent<DrillMovement>();
-        drill.enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -26,9 +26,23 @@ public class DrillRange : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!canActivate)
+            return;
+
         if (collision.gameObject.tag == "Player")
         {
             playerManager.SwitchCameras("drill");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (!canActivate)
+            {
+                canActivate = true;
+            }
         }
     }
 }

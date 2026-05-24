@@ -15,11 +15,18 @@ public class PlayerManager : MonoBehaviour
             drillMove.StartCamera();
 
             player.GetComponent<PlayerMovement>().StopCamera();
+            player.GetComponent<PlayerMovement>().enabled = false;
             player.SetActive(false);
         }
-        else
+        else if (nextCam == "player")
         {
-            
+            player.gameObject.SetActive(true);
+
+            Transform drill = GameObject.Find("Drill").transform;
+            player.transform.position = drill.position;
+
+            player.GetComponent<PlayerMovement>().enabled = true;
+            player.GetComponent<PlayerMovement>().StartCamera();
         }
     }
 

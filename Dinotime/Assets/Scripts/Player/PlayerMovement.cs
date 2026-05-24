@@ -23,6 +23,13 @@ public class PlayerMovement : MonoBehaviour
     public void StopCamera()
     {
         transform.Find("FollowCamera").gameObject.SetActive(false);
+
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public void StartCamera()
+    {
+        transform.Find("FollowCamera").gameObject.SetActive(true);
     }
 
     private void Update()
