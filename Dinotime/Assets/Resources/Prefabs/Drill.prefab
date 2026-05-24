@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 1352522833393800907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -218,6 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrillMovement
   speed: 5
+  oilDranage: 2
+  oilDranageRate: 1
   mineBoxSize: {x: 1, y: 2}
   drillTip: {fileID: 1342742169908041959}
 --- !u!61 &8987063001493833865

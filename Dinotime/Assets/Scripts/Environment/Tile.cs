@@ -7,6 +7,8 @@ public  class Tile : MonoBehaviour
 
     private int lifeLeft;
 
+    internal PlayerManager playerManager;
+
     public virtual void Collect()
     {
         
@@ -15,6 +17,8 @@ public  class Tile : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
         lifeLeft = mineLifetime;
     }
 }

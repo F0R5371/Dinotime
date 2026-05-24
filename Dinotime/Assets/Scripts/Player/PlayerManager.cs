@@ -2,7 +2,26 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    private int fossilCount = 0;
+    private int oilCount = 100;
+
     private GameObject player;
+
+    private UIManager uiManager;
+
+    public void CollectItem(string item)
+    {
+        if (item == "fossil")
+        {
+            fossilCount += 1;
+            uiManager.UpdateHUD(fossilCount, "Fossil");
+        }
+        else if (item == "oil")
+        {
+            oilCount += 1;
+            uiManager.UpdateHUD(oilCount, "Gas");
+        }
+    }
 
     public void SwitchCameras(string nextCam)
     {
@@ -30,9 +49,17 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void DrainOil(int amount)
+    {
+        oilCount -= amount;
+        uiManager.UpdateHUD(oilCount, "Gas");
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+
         player = GameObject.Find("Player");
     }
 
@@ -41,4 +68,5 @@ public class PlayerManager : MonoBehaviour
     {
 
     }
+
 }

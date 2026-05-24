@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4170689542254240520, guid: fb4bbc62597fa5b428d97e4d5a59d399, type: 3}
+      propertyPath: mineLifetime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5272767217170390347, guid: fb4bbc62597fa5b428d97e4d5a59d399, type: 3}
       propertyPath: m_Name
       value: Ground2

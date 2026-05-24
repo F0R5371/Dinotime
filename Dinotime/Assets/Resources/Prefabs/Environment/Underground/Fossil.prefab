@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 12773840962464181}
   - component: {fileID: 3676889428821937713}
   - component: {fileID: -5929575880731041161}
-  - component: {fileID: -8348238546555434424}
+  - component: {fileID: -8613494977977107388}
   m_Layer: 7
   m_Name: Fossil
   m_TagString: Fossil
@@ -139,7 +139,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-8348238546555434424
+--- !u!114 &-8613494977977107388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3806510210745576446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca872b85d3fa4557b29afd59466a594, type: 3}
+  m_Script: {fileID: 11500000, guid: bb32cb07d9eb147ebb3e1f19f0f7c43a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundTile
-  blockName: Fossil
-  mineLifetime: 5
+  m_EditorClassIdentifier: Assembly-CSharp::FossilTile
+  blockName: 
+  mineLifetime: 0

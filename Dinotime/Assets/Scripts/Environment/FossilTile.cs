@@ -4,6 +4,6 @@ public class FossilTile : Tile
 {
     public override void Collect()
     {
-        
+        playerManager.CollectItem("fossil");
     }
 }

@@ -4,10 +4,14 @@ public class DrillMovement : MonoBehaviour
 {
     [Header("Settings")]
     public float speed = 5f;
+    public int oilDranage;
+    public float oilDranageRate;
     public Vector2 mineBoxSize = new Vector2(1, 1);
 
     [Header("References")]
     public Transform drillTip;
+
+    private float startTime = 0;
 
     private bool playerInDrill = false;
     private Rigidbody2D rb;
@@ -19,6 +23,11 @@ public class DrillMovement : MonoBehaviour
     {
         transform.Find("FollowCamera").gameObject.SetActive(true);
         playerInDrill = true;
+    }
+
+    void OnEnable()
+    {
+        startTime = Time.fixedTime;
     }
 
     void Start()
@@ -40,6 +49,8 @@ public class DrillMovement : MonoBehaviour
 
         ExitDrill();
         HandleMovementAndMining();
+
+        DrainOil();
     }
 
     private void UpdateDrillVisuals(float x)
@@ -89,10 +100,7 @@ public class DrillMovement : MonoBehaviour
 
         foreach (Collider2D hitCollider in hits)
         {
-            if (hitCollider.CompareTag("Fossil"))
-            {
-                Debug.Log("FOSSIL EVENT TRIGGERED! You found some old bones.");
-            }
+            hitCollider.transform.GetComponent<Tile>().Collect();
 
             Destroy(hitCollider.gameObject);
         }
@@ -118,5 +126,15 @@ public class DrillMovement : MonoBehaviour
         Matrix4x4 rotationMatrix = Matrix4x4.TRS(drillTip.position, transform.rotation, Vector3.one);
         Gizmos.matrix = rotationMatrix;
         Gizmos.DrawWireCube(Vector3.zero, mineBoxSize);
+    }
+
+    private void DrainOil()
+    {
+        float timeRemaining = Time.fixedTime - startTime;
+        if (timeRemaining > oilDranageRate)
+        {
+            playerManager.DrainOil(oilDranage);
+            startTime = Time.fixedTime;
+        }
     }
 }
