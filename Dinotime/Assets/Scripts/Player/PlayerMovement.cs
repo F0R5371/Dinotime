@@ -3,18 +3,30 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
-    private bool isFacingRight = true;
+    [Header("Walking")]
+    public float speed = 8f;
+
+    [Header("Jumping")]
+    public float jumpingPower = 16f;
+    public float jumpBufferTime = 0.2f;
+    public float coyoteTime = 0.2f;
 
     private bool isJumping;
-
-    private float coyoteTime = 0.2f;
+    private float horizontal;
+    private bool isFacingRight = true;
     private float coyoteTimeCounter;
-
-    private float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
+    private bool canDoubleJump = false;
+
+    [Header("Dashing")]
+    public float dashPower;
+    public float dashTime;
+    public float dashCooldownTime;
+    private bool canDash = true;
+    private bool isDashing = false;
+
+    internal bool dashAbilityActivated = false;
+    internal bool doubleJumpAbilityActivated = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -39,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded())
         {
             coyoteTimeCounter = coyoteTime;
+
+            canDoubleJump = false;
         }
         else
         {
@@ -57,10 +71,18 @@ public class PlayerMovement : MonoBehaviour
         if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && !isJumping)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-
             jumpBufferCounter = 0f;
 
-            StartCoroutine(JumpCooldown());
+            canDoubleJump = true;
+
+            //StartCoroutine(JumpCooldown());
+        }
+        else if (doubleJumpAbilityActivated && canDoubleJump && Input.GetButtonDown("Jump"))
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            jumpBufferCounter = 0f;
+
+            canDoubleJump = false;
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
@@ -71,11 +93,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
+        DashInput();
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        if (!isDashing)
+            rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
     }
 
     private bool IsGrounded()
@@ -99,5 +123,39 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
+    }
+
+    private void DashInput()
+    {
+        if (!dashAbilityActivated)
+            return;
+
+        if (!canDash)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine("Dash");
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+
+        float origGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        rb.linearVelocity = new Vector2(transform.localScale.x * dashPower, 0);
+
+        yield return new WaitForSeconds(dashTime);
+
+        rb.gravityScale = origGravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldownTime);
+
+        canDash = true;
     }
 }
