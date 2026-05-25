@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -6,8 +7,18 @@ public class PlayerManager : MonoBehaviour
     private int oilCount = 25;
 
     private GameObject player;
+    private PlayerMovement playerMovement;
 
     private UIManager uiManager;
+
+    public void StartGame()
+    {
+        player.GetComponent<PlayerMovement>().StartCamera();
+
+        GameObject.Find("TitleScreenCamera").gameObject.SetActive(false);
+
+        playerMovement.StartGame();
+    }
 
     public void CollectItem(string item)
     {
@@ -63,12 +74,18 @@ public class PlayerManager : MonoBehaviour
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 
         player = GameObject.Find("Player");
+        playerMovement = player.GetComponent<PlayerMovement>();
+
+        player.transform.position = new Vector2(0, 0.5f);
+
+        player.GetComponent<PlayerMovement>().StopCamera();
+        uiManager.ShowTitle();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+ 
     }
 
     private void FossilUpgrades()

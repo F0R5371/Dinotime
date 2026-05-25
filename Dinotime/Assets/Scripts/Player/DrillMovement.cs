@@ -23,6 +23,8 @@ public class DrillMovement : MonoBehaviour
     {
         transform.Find("FollowCamera").gameObject.SetActive(true);
         playerInDrill = true;
+
+        sp.sprite = Resources.Load<Sprite>("2D/Sprites/DinoDrill");
     }
 
     void OnEnable()
@@ -117,6 +119,8 @@ public class DrillMovement : MonoBehaviour
             playerInDrill = false;
             range.canActivate = false;
             enabled = false;
+
+            sp.sprite = Resources.Load<Sprite>("2D/Sprites/Drill");
         }
     }
 

@@ -28,9 +28,16 @@ public class PlayerMovement : MonoBehaviour
     internal bool dashAbilityActivated = false;
     internal bool doubleJumpAbilityActivated = false;
 
+    private bool canMove = false;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    public void StartGame()
+    {
+        canMove = true;
+    }
 
     public void StopCamera()
     {
@@ -46,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove)
+            return;
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (IsGrounded())
