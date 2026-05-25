@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5313291622271909822}
   - component: {fileID: 1411186926093676206}
   - component: {fileID: 8987063001493833865}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Drill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
