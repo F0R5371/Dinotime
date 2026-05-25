@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
         canvas = GameObject.Find("Canvas").transform;
 
         UpdateHUD(0, "Fossil");
-        UpdateHUD(100, "Gas");
+        UpdateHUD(25, "Gas");
     }
 
     // Update is called once per frame

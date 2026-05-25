@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     private int fossilCount = 0;
-    private int oilCount = 100;
+    private int oilCount = 25;
 
     private GameObject player;
 
@@ -21,6 +21,8 @@ public class PlayerManager : MonoBehaviour
             oilCount += 1;
             uiManager.UpdateHUD(oilCount, "Gas");
         }
+
+        FossilUpgrades();
     }
 
     public void SwitchCameras(string nextCam)
@@ -69,4 +71,17 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    private void FossilUpgrades()
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+
+        if (fossilCount >= 10)
+        {
+            playerMovement.dashAbilityActivated = true;
+        }
+        else if (fossilCount >= 25)
+        {
+            playerMovement.doubleJumpAbilityActivated = true;
+        }
+    }
 }
