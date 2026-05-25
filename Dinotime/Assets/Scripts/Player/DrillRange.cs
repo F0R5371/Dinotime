@@ -9,19 +9,19 @@ public class DrillRange : MonoBehaviour
 
     void Awake()
     {
-        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)

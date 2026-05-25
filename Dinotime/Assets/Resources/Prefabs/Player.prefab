@@ -185,7 +185,7 @@ MonoBehaviour:
   jumpingPower: 16
   jumpBufferTime: 0.2
   coyoteTime: 0.2
-  dashPower: 5
+  dashPower: 9
   dashTime: 0.3
   dashCooldownTime: 1
   rb: {fileID: 2242562212066853013}

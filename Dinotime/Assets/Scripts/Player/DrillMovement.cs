@@ -19,9 +19,11 @@ public class DrillMovement : MonoBehaviour
     private DrillRange range;
     private PlayerManager playerManager;
 
+    private GameObject followCamera;
+
     public void StartCamera()
     {
-        transform.Find("FollowCamera").gameObject.SetActive(true);
+        followCamera.SetActive(true);
         playerInDrill = true;
 
         sp.sprite = Resources.Load<Sprite>("2D/Sprites/DinoDrill");
@@ -32,10 +34,16 @@ public class DrillMovement : MonoBehaviour
         startTime = Time.fixedTime;
     }
 
+    void Awake()
+    {
+        followCamera = GameObject.Find("DrillFollowCamera");
+    }
+
     void Start()
     {
+        followCamera.SetActive(false);
+
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-        transform.Find("FollowCamera").gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
@@ -114,7 +122,7 @@ public class DrillMovement : MonoBehaviour
         {
             playerManager.SwitchCameras("player");
             rb.linearVelocity = Vector2.zero;
-            transform.Find("FollowCamera").gameObject.SetActive(false);
+            GameObject.Find("DrillFollowCamera").gameObject.SetActive(false);
 
             playerInDrill = false;
             range.canActivate = false;

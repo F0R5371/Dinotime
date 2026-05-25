@@ -92,13 +92,15 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
-        if (fossilCount >= 10)
+        if (fossilCount >= 10 && !playerMovement.dashAbilityActivated)
         {
             playerMovement.dashAbilityActivated = true;
+            uiManager.ShowMessage("Dash Unlocked!<br>Press E To Dash");
         }
-        else if (fossilCount >= 25)
+        else if (fossilCount >= 25 && !playerMovement.doubleJumpAbilityActivated)
         {
             playerMovement.doubleJumpAbilityActivated = true;
+            uiManager.ShowMessage("Double Jump Unlocked!");
         }
     }
 }
