@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7885372470995779766
+--- !u!1 &7030147294346957419
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4715907590425330656}
-  - component: {fileID: 3345567733262983659}
+  - component: {fileID: 6845432121441762956}
+  - component: {fileID: 984422484764782300}
   m_Layer: 0
-  m_Name: PlayerCameraBounds
+  m_Name: DrillCameraBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4715907590425330656
+--- !u!4 &6845432121441762956
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7885372470995779766}
+  m_GameObject: {fileID: 7030147294346957419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &3345567733262983659
+--- !u!60 &984422484764782300
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7885372470995779766}
+  m_GameObject: {fileID: 7030147294346957419}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -78,17 +78,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 36.35424, y: 4.154763}
-      - {x: 36.196915, y: 36.48501}
-      - {x: 18.43469, y: 38.668945}
-      - {x: 6.5123653, y: 38.340733}
-      - {x: 4.1489687, y: 36.010677}
-      - {x: 4.38642, y: 18.304432}
-      - {x: -7.007505, y: 18.156675}
-      - {x: -7.0118084, y: -18.871782}
-      - {x: 7.0332136, y: -18.898811}
-      - {x: 7.0097504, y: -5.43235}
-      - {x: 8.95933, y: -2.5290878}
-      - {x: 28.514847, y: -2.6828508}
-      - {x: 28.509293, y: 4.1710567}
+    - - {x: -6.007875, y: 10.870695}
+      - {x: -6.0005994, y: -18.846582}
+      - {x: 6.00872, y: -19.013502}
+      - {x: 5.985496, y: 10.904394}
   m_UseDelaunayMesh: 1
